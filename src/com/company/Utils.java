@@ -9,7 +9,7 @@ public class Utils {
             avrMarks = 0;
 
         for (Student a:students) {
-            Subject[] subjects = a.getSubjects();
+            Student.Subject[] subjects = a.getSubjects();
             for (int i = 0; i < subjects.length; i++){
                 averageMarkForEverySub[i] += subjects[i].getMark();
             }
@@ -19,7 +19,7 @@ public class Utils {
             if (averageMarkForEverySub[maxMark] < averageMarkForEverySub[i])
                 maxMark = i;
         }
-        return Student.nameSubjects[maxMark];
+        return Student.NameSubjects.values()[maxMark].toString();
     }
 
 
@@ -31,11 +31,12 @@ public class Utils {
             avrMarks = 0;
 
         for (int j = 0; j < students.length; j++) {
-            Subject[] subjects = students[j].getSubjects();
-            for (int i = 0; i < subjects.length; i++){
-                averageMarkForEveryStudent[j] += subjects[i].getMark();
+            Student.Subject[] subjects = students[j].getSubjects();
+            for (Student.Subject subject : subjects) {
+                averageMarkForEveryStudent[j] += subject.getMark();
             }
         }
+
         int bestStudentId = 0;
         for (int i = 0; i < students.length; i++){
             if (averageMarkForEveryStudent[bestStudentId] < averageMarkForEveryStudent[i])
@@ -60,9 +61,9 @@ public class Utils {
                 result += "+grant\n";
             else
                 result += "\n";
-            
-            Subject[] subjects = student.getSubjects();
-            for (Subject subject: subjects) {
+
+            Student.Subject[] subjects = student.getSubjects();
+            for (Student.Subject subject: subjects) {
                 result += subject.getNameSubject() + " " + subject.getMark();
                 if (subject.isPassed())
                     result += " passed\n";
